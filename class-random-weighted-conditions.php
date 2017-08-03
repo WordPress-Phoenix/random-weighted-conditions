@@ -29,9 +29,9 @@ class Random_Weighted_Conditions {
 		return $this->weighted_conditions[ $random_key ];
 	}
 
-	public function get_distribution() {
-		return array_count_values( array_combine( array_fill( 0, count( $this->weighted_conditions ), 'smh' ), $this->weighted_conditions ) );
-	}
+	// public function get_distribution() {
+	//	return array_count_values( array_combine( array_fill( 0, count( $this->weighted_conditions ), 'smh' ), $this->weighted_conditions ) );
+	// }
 
 	protected function set_condition_weights() {
 		$weighted       = array();
