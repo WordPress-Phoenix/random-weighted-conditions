@@ -23,7 +23,7 @@ echo $colors->get_random_condition();
 
 # How it Works
 ### Step 1
-Developer provides `array()` of `key => val` pairs where condition keys and weight values. 
+Developer provides `array()` of `key => val` pairs with condition keys and weight values. 
 ```
 0 will exclude a condition, but `empty()` values are given equal distribution of remaining total.
 ```
