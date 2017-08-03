@@ -67,7 +67,7 @@ class Random_Weighted_Conditions {
 						$round_off[] = $ext_weights[ $i ];
 					}
 				}
-				$auto_weighted = $auto_weighted + $round_off;
+				$auto_weighted = array_merge( $auto_weighted, $round_off );
 			}
 		}
 		$this->weighted_conditions = array_merge( $weighted, $auto_weighted );
