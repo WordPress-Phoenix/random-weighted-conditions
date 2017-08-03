@@ -22,9 +22,15 @@ echo $colors->get_random_condition();
 ```
 
 # How it Works
-**1** / Developer provides `array()` of `key => val` pairs where condition keys and weight values. 
+### Step 1
+Developer provides `array()` of `key => val` pairs where condition keys and weight values. 
 ```
 0 will exclude a condition, but `empty()` values are given equal distribution of remaining total.
 ```
-**2** / Class validates data and creates an array with 100 string conditions, based on weights provided.
-**3** / Class randomly selects one of strings.
+### Step 2
+Class validates data and creates an array with 100 string conditions, based on weights provided.
+
+### Step 3
+Class randomly selects one of strings.
+
+:dancer:
