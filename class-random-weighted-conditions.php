@@ -1,6 +1,6 @@
 <?php
 
-namespace WPAZ_RWC\V_1_0;
+namespace WPAZ_RWC\V_1_1;
 
 class Random_Weighted_Conditions {
 	public $count;
@@ -21,17 +21,10 @@ class Random_Weighted_Conditions {
 	}
 
 	public function get_random_condition() {
-		if ( empty( $this->weighted_conditions ) ) {
-			return '';
-		}
-		$random_key = mt_rand( 0, count( array_keys( $this->weighted_conditions ) ) - 1 );
+		$rand_key = mt_rand( 0, count( array_keys( $this->weighted_conditions ) ) - 1 );
 
-		return $this->weighted_conditions[ $random_key ];
+		return ! empty( $this->weighted_conditions ) ? $this->weighted_conditions[ $rand_key ] : '';
 	}
-
-	// public function get_distribution() {
-	//	return array_count_values( array_combine( array_fill( 0, count( $this->weighted_conditions ), 'smh' ), $this->weighted_conditions ) );
-	// }
 
 	protected function set_condition_weights() {
 		$weighted       = array();
@@ -59,15 +52,14 @@ class Random_Weighted_Conditions {
 			}
 			if ( count( $weighted ) < $this->total ) { // we're recounting purposefully
 				$remaining_outcomes = $this->total - count( $weighted );
-				$ext_weights        = $auto_weighting + $auto_weighting + $auto_weighting + $auto_weighting + $auto_weighting
-				                      + $auto_weighting + $auto_weighting + $auto_weighting + $auto_weighting + $auto_weighting; // 🙈 it works ¯\_(ツ)_/¯
+				$ext_weights        = array_map( function ( $el ) { return $el * 10; }, $auto_weighting );
 				$round_off          = array();
 				for ( $i = 0; $i <= $remaining_outcomes; $i ++ ) {
 					if ( ! empty( $ext_weights[ $i ] ) ) {
 						$round_off[] = $ext_weights[ $i ];
 					}
 				}
-				$auto_weighted = array_merge( $auto_weighted, $round_off );
+				$auto_weighted = $auto_weighted + $round_off;
 			}
 		}
 		$this->weighted_conditions = array_merge( $weighted, $auto_weighted );
@@ -75,23 +67,49 @@ class Random_Weighted_Conditions {
 
 	protected function validate() {
 		if ( $this->has_unique_keys()
-		     && $this->weights_dont_exede_total()
+		     && $this->weights_dont_excede_total()
 		) {
 			$this->valid = true;
 		} else {
 			$this->valid = false;
 			$this->debug = array(
 				'has_unique_keys'           => $this->has_unique_keys(),
-				'weights_dont_exede_total' => $this->weights_dont_exede_total(),
+				'weights_dont_excede_total' => $this->weights_dont_excede_total(),
 			);
 		}
+	}
+
+	public function get_calculated_total() {
+		return array_sum( array_values( array_count_values( $this->weighted_conditions ) ) );
+	}
+
+	public function get_simple_distribution() {
+		return array_count_values( $this->weighted_conditions ) + array( 'Calculated Total' => $this->get_calculated_total() );
+	}
+
+	public function get_distribution() {
+		return array_map( array( $this, 'create_display' ), $this->get_simple_distribution() );
+	}
+
+	public function build_table( $array ) {
+		ob_start();
+		echo '<table class="wp-list-table widefat striped">';
+		foreach( $array as $key => $val ) {
+			echo '<tr><td><code>' . $key .'</code></td><td><code>' . $val . '</code></td></tr>';
+		}
+		echo '</table>';
+		return ob_get_clean();
+	}
+
+	protected function create_display( $item ) {
+		return $item . ' / ' . $this->get_calculated_total() . ' (' . $item . '%)';
 	}
 
 	protected function has_unique_keys() {
 		return $this->count === count( array_unique( array_keys( $this->created_conditions ) ) );
 	}
 
-	protected function weights_dont_exede_total() {
+	protected function weights_dont_excede_total() {
 		return array_sum( $this->created_conditions ) <= $this->total;
 	}
 
