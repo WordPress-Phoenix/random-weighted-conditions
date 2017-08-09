@@ -2,9 +2,12 @@
 
 Pass a set of conditions and weights, and build a random condition generator.
 
-i.e.
+#### i.e.
 
-When serving fruit, serve `Apples` 50% of the time, serve `Oranges` 10% of the time and serve `Grapes` the rest of the time.
+When serving fruit... 
+* Serve `Apples` 50% of the time
+* Serve `Oranges` 10% of the time
+* Serve `Grapes` the rest of the time
 
 # Example
 
