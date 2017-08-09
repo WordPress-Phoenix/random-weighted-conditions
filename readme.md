@@ -8,6 +8,7 @@ When serving fruit...
 * Serve `Apples` 50% of the time
 * Serve `Oranges` 10% of the time
 * Serve `Grapes` the rest of the time
+* Serve `Jackfruit` never
 
 # Example
 
@@ -18,6 +19,7 @@ $conditions = array(
 	'apples'    => 50,
 	'oranges'   => 10,
 	'grapes'    => null,
+	`jackfruit` => 0,
 );
 
 $colors = new \WPAZ_RWC\V_1_2\Random_Weighted_Conditions( $conditions );
