@@ -34,7 +34,7 @@ Developer provides `array()` of `key => val` pairs with condition keys and weigh
 * All other true-testing `empty()` values are giving _equal distribution of remaining total, following preassigned weights_
 
 ### Step 2
-Class validates data and creates an array with 100 string conditions (can be modified), based on weights provided.
+Class validates data and creates an array with 100 string conditions (total can be modified, conditions looped sequentially), based on weights provided.
 
 ### Step 3
 Class randomly selects one of strings.
