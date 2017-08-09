@@ -100,9 +100,7 @@ class Random_Weighted_Conditions {
 			}
 			if ( count( $weighted ) < $this->total ) { // we're recounting purposefully
 				$remaining_outcomes = $this->total - count( $weighted );
-				$ext_weights        = array_map( function ( $el ) {
-					return $el * 10;
-				}, $auto_weighting );
+				$ext_weights        = array_map( function ( $el ) { return $el * 10; }, $auto_weighting );
 				$round_off          = array();
 				for ( $i = 0; $i <= $remaining_outcomes; $i ++ ) {
 					if ( ! empty( $ext_weights[ $i ] ) ) {
