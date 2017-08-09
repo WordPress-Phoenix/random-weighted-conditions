@@ -20,7 +20,7 @@ $conditions = array(
 	'grapes'    => null,
 );
 
-$colors = new \WPAZ_RWC\V_1_0\Random_Weighted_Conditions( $conditions );
+$colors = new \WPAZ_RWC\V_1_2\Random_Weighted_Conditions( $conditions );
 
 // will be `apples` 50%, `oranges` 10% and `grapes` 40%
 echo $colors->get_random_condition();
