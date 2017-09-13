@@ -1,6 +1,6 @@
  "name": "wordpress-phoenix/random-weighted-conditions",
     "type": "library",
-    "description": "Library that helps you randomize key/value pairs",
+    "description": "Library that helps you randomize key + value pairs",
     "keywords": ["utility","helper"],
     "homepage": "https://github.com/WordPress-Phoenix/random-weighted-conditions",
     "license": "GPL-v3",
